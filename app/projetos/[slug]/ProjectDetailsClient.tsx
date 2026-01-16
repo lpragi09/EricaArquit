@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Project } from "../../data/projects";
 
@@ -8,8 +9,6 @@ type ProjectDetailsClientProps = {
 };
 
 export function ProjectDetailsClient({ project }: ProjectDetailsClientProps) {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
   return (
     <div className="bg-[#0a0a0a] text-[#f6f2ed]">
       <section className="relative overflow-hidden">
@@ -23,16 +22,20 @@ export function ProjectDetailsClient({ project }: ProjectDetailsClientProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/35 to-transparent" />
         </div>
         <div className="relative mx-auto grid min-h-[70vh] max-w-6xl gap-10 px-6 pb-16 pt-28 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <motion.a
-            href={`${basePath}/`}
+          <Link
+            href="/"
             data-cursor="interactive"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="absolute left-6 top-10 inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#d8cfc2] transition hover:text-white md:left-6 md:top-12"
+            className="absolute left-6 top-10 md:left-6 md:top-12"
           >
-            ← Voltar ao início
-          </motion.a>
+            <motion.span
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#d8cfc2] transition hover:text-white"
+            >
+              ← Voltar ao início
+            </motion.span>
+          </Link>
           <div className="space-y-6">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
