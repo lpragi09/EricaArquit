@@ -8,6 +8,8 @@ type ProjectDetailsClientProps = {
 };
 
 export function ProjectDetailsClient({ project }: ProjectDetailsClientProps) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
   return (
     <div className="bg-[#0a0a0a] text-[#f6f2ed]">
       <section className="relative overflow-hidden">
@@ -22,7 +24,7 @@ export function ProjectDetailsClient({ project }: ProjectDetailsClientProps) {
         </div>
         <div className="relative mx-auto grid min-h-[70vh] max-w-6xl gap-10 px-6 pb-16 pt-28 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <motion.a
-            href="/"
+            href={`${basePath}/`}
             data-cursor="interactive"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
