@@ -11,7 +11,6 @@ export function SmoothScroll() {
       const { default: Lenis } = await import("@studio-freight/lenis");
       lenis = new Lenis({
         smoothWheel: true,
-        smoothTouch: false,
         lerp: 0.08,
       });
 
