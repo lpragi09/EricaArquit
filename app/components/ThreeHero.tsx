@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Stage, useGLTF } from "@react-three/drei";
 import { Suspense } from "react";
 import * as THREE from "three";
@@ -11,37 +11,49 @@ const MODEL_URL = `${
 
 function Scene() {
   const { scene } = useGLTF(MODEL_URL);
+  const { size } = useThree();
+  const isMobile = size.width < 640;
+  const scale = isMobile ? 1.35 : 1.65;
+  const position: [number, number, number] = isMobile
+    ? [0.1, -0.9, 0.2]
+    : [0.2, -1.0, 0];
   
   return (
     <primitive 
       object={scene} 
-      scale={1.65} 
-      position={[0.2, -1.0, 0]} 
+      scale={scale} 
+      position={position} 
       rotation={[0, 1.57, 0]} 
     />
   );
 }
 
 function CameraRig() {
+  const { size } = useThree();
+  const isMobile = size.width < 640;
+  const distance = isMobile ? 5.2 : size.width < 1024 ? 6.0 : 6.5;
+  const xRange = isMobile ? 0.35 : 0.6;
+  const yRange = isMobile ? 0.22 : 0.35;
+
   useFrame((state, delta) => {
     // AUMENTANDO A LIBERDADE DE EXPLORAÇÃO:
     
     // xRange: Aumentei de 0.2 para 0.6
     // Agora você consegue girar bem mais para a esquerda e direita.
-    const xRange = 0.6; 
+    // (agora ajustado por tamanho de tela)
     
     // yRange: Aumentei de 0.1 para 0.35
     // Agora você consegue olhar bem pro teto (lustres) e bem pro chão (tapete).
-    const yRange = 0.35; 
+    // (agora ajustado por tamanho de tela)
 
     const targetAzimuth = state.pointer.x * xRange; 
     const targetPolar = (Math.PI / 2) + (state.pointer.y * yRange); 
 
-    const distance = 6.5; 
+    // Distância ajustada por tamanho de tela
 
     const x = Math.sin(targetAzimuth) * distance;
     const z = Math.cos(targetAzimuth) * distance;
-    const y = Math.cos(targetPolar) * distance * 0.3 + 0.4;
+    const y = Math.cos(targetPolar) * distance * 0.3 + (isMobile ? 0.2 : 0.4);
 
     // Aumentei levemente o lerp para 0.04 para a câmera acompanhar 
     // a distância maior sem ficar "atrasada" demais.
@@ -67,7 +79,7 @@ function CanvasLoader() {
 
 export function ThreeHero() {
   return (
-    <div className="relative h-[500px] w-full overflow-hidden rounded-[40px] bg-[#e8e6e1]">
+    <div className="relative h-[320px] w-full overflow-hidden rounded-[32px] bg-[#e8e6e1] sm:h-[400px] lg:h-[500px]">
       <Suspense fallback={<CanvasLoader />}>
         <Canvas
           dpr={[1, 1.5]}

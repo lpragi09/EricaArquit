@@ -26,6 +26,8 @@ const services = [
 ];
 
 export function Services() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
   return (
     <section
       id="servicos"
@@ -52,9 +54,9 @@ export function Services() {
               <span>Entrega</span>
             </div>
             <img
-              src="/logo-erica-dias-moreno.png"
+              src={`${basePath}/logo-erica-dias-moreno.png`}
               alt="Erica Dias Moreno Arquitetura"
-              className="mt-auto w-full max-w-[360px] pb-24 opacity-90 md:max-w-[420px]"
+              className="mt-auto w-full max-w-[260px] pb-14 opacity-90 sm:max-w-[320px] md:max-w-[380px] lg:pb-24"
             />
           </div>
         </Reveal>

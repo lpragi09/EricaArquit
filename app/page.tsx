@@ -9,6 +9,8 @@ import { SmoothScroll } from "./components/SmoothScroll";
 import { Studio } from "./components/Studio";
 
 export default function Home() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
   return (
     <div className="cursor-none bg-[#0a0a0a] text-[#f6f2ed]">
       <SmoothScroll />
@@ -25,9 +27,9 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.1fr_0.9fr_0.6fr]">
           <div className="space-y-5">
             <img
-              src="/logo-erica-dias-moreno.png"
+              src={`${basePath}/logo-erica-dias-moreno.png`}
               alt="Erica Dias Moreno Arquitetura"
-              className="w-40 max-w-full opacity-90"
+              className="w-32 max-w-full opacity-90 sm:w-36 md:w-40"
             />
           </div>
           <div className="space-y-4 text-xs uppercase tracking-[0.3em]">
