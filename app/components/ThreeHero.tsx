@@ -5,7 +5,9 @@ import { Stage, useGLTF } from "@react-three/drei";
 import { Suspense } from "react";
 import * as THREE from "three";
 
-const MODEL_URL = "/kitchen-transformed.glb";
+const MODEL_URL = `${
+  process.env.NEXT_PUBLIC_BASE_PATH ?? ""
+}/kitchen-transformed.glb`;
 
 function Scene() {
   const { scene } = useGLTF(MODEL_URL);

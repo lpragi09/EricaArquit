@@ -8,6 +8,9 @@ const nextConfig = {
   trailingSlash: true,
   basePath: isProd ? "/EricaArquit" : "",
   assetPrefix: isProd ? "/EricaArquit/" : "",
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isProd ? "/EricaArquit" : "",
+  },
 };
 
 export default nextConfig;
